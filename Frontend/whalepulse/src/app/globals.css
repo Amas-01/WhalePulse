@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --bg-void:     #020810;
+  --bg-surface:  #050e1a;
+  --bg-card:     #070f1c;
+  --bg-elevated: #0a1628;
+
+  --cyan:        #00e5ff;
+  --cyan-dim:    #00b4c8;
+  --cyan-glow:   rgba(0, 229, 255, 0.15);
+
+  --teal:        #00ffc8;
+  --teal-dim:    #00b890;
+  --amber:       #ffd166;
+  --red-alert:   #ff3d6b;
+
+  --text-primary:   #e8f4f8;
+  --text-secondary: #7bafc8;
+  --text-muted:     #3b6f85;
+  --border-dim:     #0d2537;
+  --border-glow:    rgba(0, 229, 255, 0.25);
+
+  --font-orbitron: 'Orbitron', system-ui, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', ui-monospace, monospace;
+  --font-syne: 'Syne', system-ui, sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-syne), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Ambient gradient backdrop */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 229, 255, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,  rgba(0, 255, 200, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 60%,  rgba(0, 180, 200, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   GLASSMORPHISM CARDS
+═══════════════════════════════════════════════════ */
+.glass-card {
+  background: linear-gradient(135deg, rgba(7,15,28,0.95) 0%, rgba(5,14,26,0.90) 100%);
+  border: 1px solid var(--border-dim);
+  border-top-color: rgba(0, 229, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.4),
+    0 1px 0 rgba(0,229,255,0.06) inset,
+    0 0 0 1px rgba(255,255,255,0.02) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+}
+
+.glass-card-inner {
+  background: rgba(10,22,40,0.6);
+  border: 1px solid rgba(13,37,55,0.8);
+  border-radius: 10px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.glass-card-inner:hover {
+  background: rgba(13,28,50,0.8);
+  border-color: rgba(0,229,255,0.15);
+}
+
+/* ═══════════════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════════════ */
+.font-display  { font-family: var(--font-orbitron); }
+.font-mono-jet { font-family: var(--font-jetbrains); }
+.font-ui       { font-family: var(--font-syne); }
+
+.text-glow-cyan {
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0,229,255,0.5);
+}
+.text-glow-amber {
+  color: var(--amber);
+  text-shadow: 0 0 10px rgba(255,209,102,0.4);
+}
+
+/* ═══════════════════════════════════════════════════
+   NEON BUTTON
+═══════════════════════════════════════════════════ */
+.btn-neon {
+  background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(0,200,220,0.1));
+  border: 1px solid rgba(0,229,255,0.4);
+  color: var(--cyan);
+  font-family: var(--font-orbitron);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(0,229,255,0.08);
+}
+.btn-neon:hover {
+  background: linear-gradient(135deg, rgba(0,229,255,0.25), rgba(0,200,220,0.18));
+  box-shadow: 0 0 20px rgba(0,229,255,0.25), 0 0 40px rgba(0,229,255,0.1);
+  border-color: rgba(0,229,255,0.7);
+}
+.btn-neon:active { transform: scale(0.97); }
+.btn-neon:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+
+/* ═══════════════════════════════════════════════════
+   INPUT
+═══════════════════════════════════════════════════ */
+.input-neon {
+  background: rgba(5,14,26,0.8);
+  border: 1px solid var(--border-dim);
+  color: var(--text-primary);
+  font-family: var(--font-jetbrains);
+  font-size: 0.8rem;
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-neon::placeholder { color: var(--text-muted); }
+.input-neon:focus {
+  border-color: rgba(0,229,255,0.5);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.07), 0 0 16px rgba(0,229,255,0.12);
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION HEADER CHIP
+═══════════════════════════════════════════════════ */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-orbitron);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+.section-label .label-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan);
+}
+
+/* ═══════════════════════════════════════════════════
+   DOT ANIMATIONS
+═══════════════════════════════════════════════════ */
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.7; }
+}
+@keyframes blink-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+.dot-pulse { animation: pulse-slow 1.6s ease-in-out infinite; }
+.dot-blink { animation: blink-fast 1s linear infinite; }
+
+/* ═══════════════════════════════════════════════════
+   SHIMMER SKELETON
+═══════════════════════════════════════════════════ */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.shimmer-bg { position: relative; overflow: hidden; }
+.shimmer-bg::after {
+  content: '';
+  position: absolute; top: 0; left: -200%; height: 100%; width: 200%;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(0,229,255,0.05) 50%,
+    rgba(255,255,255,0) 100%);
+  animation: shimmer 1.6s infinite;
+}
+
+/* ═══════════════════════════════════════════════════
+   SONAR RINGS (loading screen)
+═══════════════════════════════════════════════════ */
+@keyframes sonar {
+  0%   { transform: translate(-50%,-50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%,-50%) scale(3.5); opacity: 0; }
+}
+.sonar-ring {
+  border-radius: 9999px;
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+}
+.sonar-ring.r1 { width: 52px; height: 52px; border: 2px solid rgba(0,229,255,0.5); animation: sonar 2.4s ease-out infinite; }
+.sonar-ring.r2 { width: 88px; height: 88px; border: 2px solid rgba(0,229,255,0.3); animation: sonar 2.4s ease-out infinite 0.4s; }
+.sonar-ring.r3 { width: 128px; height: 128px; border: 2px solid rgba(0,229,255,0.15); animation: sonar 2.4s ease-out infinite 0.8s; }
+.sonar-ring.r4 { width: 172px; height: 172px; border: 1px solid rgba(0,229,255,0.07); animation: sonar 2.4s ease-out infinite 1.2s; }
+
+/* ═══════════════════════════════════════════════════
+   SCANLINES
+═══════════════════════════════════════════════════ */
+.scanlines {
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px,
+    transparent 1px, transparent 4px
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,255,0.4); }
+
+/* ═══════════════════════════════════════════════════
+   PANIC METER CONIC GRADIENT helper
+═══════════════════════════════════════════════════ */
+.panic-ring {
+  border-radius: 50%;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.panic-ring::after {
+  content: '';
+  position: absolute; inset: 8px;
+  border-radius: 50%;
+  background: var(--bg-card);
+}
+
+/* ═══════════════════════════════════════════════════
+   MISC UTILITIES
+═══════════════════════════════════════════════════ */
+.tabular-nums { font-variant-numeric: tabular-nums; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
