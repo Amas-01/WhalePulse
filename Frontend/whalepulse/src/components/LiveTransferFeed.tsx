@@ -3,6 +3,7 @@
 import React from "react";
 import { useWhaleStore } from "@/store/whaleStore";
 import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import useNow from "@/hooks/useNow";
 
 const THRESHOLD = Number(process.env.NEXT_PUBLIC_WHALE_THRESHOLD || 100);
@@ -21,7 +22,7 @@ export default function LiveTransferFeed(): React.ReactElement {
         <span className="label-dot" style={{ background: "var(--teal)", boxShadow: "0 0 6px var(--teal)" }} />
         Live Transfer Feed
         <span className="ml-auto text-xs font-sans normal-case tracking-normal" style={{ color: "var(--text-muted)", fontFamily: "var(--font-jetbrains)", fontSize: "0.65rem" }}>
-          Native STT · Somnia Testnet
+          Native STT · Somnia Mainnet
         </span>
       </div>
 
@@ -41,7 +42,7 @@ export default function LiveTransferFeed(): React.ReactElement {
                 />
                 <div>
                   <div style={{ fontFamily: "var(--font-orbitron)", fontSize: "0.6rem", letterSpacing: "0.12em", color: "var(--text-muted)", textTransform: "uppercase" }}>
-                    Scanning Somnia Testnet
+                    Scanning Somnia Mainnet
                   </div>
                   <div style={{ fontFamily: "var(--font-jetbrains)", fontSize: "0.72rem", color: "var(--text-secondary)", marginTop: "2px" }}>
                     {blockNumber
@@ -74,7 +75,7 @@ export default function LiveTransferFeed(): React.ReactElement {
             ))}
 
             <div className="text-center pt-2" style={{ fontFamily: "var(--font-jetbrains)", fontSize: "0.65rem", color: "var(--text-muted)" }}>
-              Tracker is live — STT transfers will appear here as they happen on Somnia Testnet.
+              Tracker is live — STT transfers will appear here as they happen on Somnia Mainnet.
             </div>
 
           </div>
@@ -124,7 +125,7 @@ export default function LiveTransferFeed(): React.ReactElement {
                     </div>
                   </div>
 
-                  {/* Amount + time */}
+                  {/* Amount + time + explorer link */}
                   <div className="flex flex-col items-end shrink-0 ml-3 gap-0.5">
                     <span className="font-bold tabular-nums" style={{ fontFamily: "var(--font-jetbrains)", fontSize: "0.82rem", color: amtColor }}>
                       {formatAmt(t.amount)} STT
@@ -132,6 +133,26 @@ export default function LiveTransferFeed(): React.ReactElement {
                     <span style={{ fontFamily: "var(--font-jetbrains)", fontSize: "0.62rem", color: "var(--text-muted)" }}>
                       {timeAgo(t.timestamp, now)}
                     </span>
+                    {t.txHash && (
+                      <a
+                        href={`https://explorer.somnia.network/tx/${t.txHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="View on Somnia Explorer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          color: "var(--text-muted)",
+                          display: "flex",
+                          alignItems: "center",
+                          marginTop: "2px",
+                          transition: "color 0.15s ease",
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--cyan)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                      >
+                        <ExternalLink size={11} />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               );

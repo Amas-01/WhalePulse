@@ -3,6 +3,7 @@
 import React from "react";
 import { useWhaleStore } from "@/store/whaleStore";
 import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import useNow from "@/hooks/useNow";
 
 const THRESHOLD = Number(process.env.NEXT_PUBLIC_WHALE_THRESHOLD || 100);
@@ -50,12 +51,16 @@ export default function WhaleLeaderboard(): React.ReactElement {
                       >
                         #{i + 1}
                       </span>
-                      <span
-                        className="font-mono text-sm text-[var(--text-primary)]"
+                      <a
+                        href={`https://explorer.somnia.network/address/${w.address}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-sm text-[var(--text-primary)] hover:text-cyan-400 transition-colors flex items-center gap-1 group/link"
                         style={{ fontFamily: "var(--font-jetbrains)", fontSize: "0.78rem" }}
                       >
                         {short(w.address)}
-                      </span>
+                        <ExternalLink size={10} className="text-[var(--text-muted)] group-hover/link:text-cyan-400" />
+                      </a>
                       {w.isSuspicious && (
                         <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: "rgba(255,61,107,0.15)", color: "#ff3d6b", fontSize: "0.6rem", fontFamily: "var(--font-orbitron)", letterSpacing: "0.1em" }}>
                           SUSPICIOUS

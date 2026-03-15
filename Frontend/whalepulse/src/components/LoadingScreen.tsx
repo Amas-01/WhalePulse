@@ -58,7 +58,7 @@ export default function LoadingScreen({ visible }: { visible: boolean }) {
             </div>
 
             <div className="mt-5 text-xs text-[#2d5a6e]" style={{ fontFamily: "var(--font-jetbrains)" }}>
-              Auto-revealing in 6 seconds if testnet is slow...
+              Auto-revealing in 6 seconds if mainnet is slow...
             </div>
           </div>
         </motion.div>

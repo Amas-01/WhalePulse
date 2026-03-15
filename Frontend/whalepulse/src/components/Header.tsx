@@ -22,7 +22,7 @@ export default function Header(): React.ReactElement {
   });
 
   const statusConfig = {
-    connected: { color: "#00ffc8", pulse: "dot-pulse", label: "SOMNIA TESTNET · LIVE" },
+    connected: { color: "#00ffc8", pulse: "dot-pulse", label: "SOMNIA MAINNET · LIVE" },
     connecting: { color: "#ffd166", pulse: "dot-blink", label: "CONNECTING…" },
     reconnecting: { color: "#ff9940", pulse: "dot-blink", label: `RECONNECTING (${attempt}/5)…` },
     disconnected: { color: "#ff3d6b", pulse: "", label: "DISCONNECTED" },
@@ -124,6 +124,7 @@ export default function Header(): React.ReactElement {
 
         {/* Live clock */}
         <div
+          suppressHydrationWarning
           className="px-3 py-1.5 rounded-lg tabular-nums"
           style={{
             fontFamily: "var(--font-jetbrains)",

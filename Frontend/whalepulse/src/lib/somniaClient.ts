@@ -8,7 +8,7 @@ export interface SomniaClientOptions {
 }
 
 /**
- * SomniaClient — tracks NATIVE STT transfers on Somnia testnet.
+ * SomniaClient — tracks NATIVE STT transfers on Somnia Mainnet.
  *
  * Strategy (most-to-least reliable):
  *  1. HTTP polling (PRIMARY)  — polls eth_blockNumber every 5s, fetches each
@@ -32,8 +32,8 @@ export class SomniaClient extends EventEmitter {
 
   constructor(opts: SomniaClientOptions) {
     super();
-    this.rpcUrl = opts.rpcUrl || "https://dream-rpc.somnia.network";
-    this.wsUrl = opts.wsUrl || "wss://dream-rpc.somnia.network";
+    this.rpcUrl = opts.rpcUrl || "https://api.infra.mainnet.somnia.network/";
+    this.wsUrl = opts.wsUrl || "wss://dream-rpc.somnia.network/ws";
     this.pollIntervalMs = opts.pollIntervalMs ?? 5000;
   }
 
@@ -240,8 +240,8 @@ export class SomniaClient extends EventEmitter {
 let _client: SomniaClient | null = null;
 
 export function getSomniaClient(
-  rpcUrl = process.env.NEXT_PUBLIC_SOMNIA_RPC_URL || "https://dream-rpc.somnia.network",
-  wsUrl = process.env.NEXT_PUBLIC_SOMNIA_WS_URL || "wss://dream-rpc.somnia.network",
+  rpcUrl = process.env.NEXT_PUBLIC_SOMNIA_RPC_URL || "https://api.infra.mainnet.somnia.network/",
+  wsUrl = process.env.NEXT_PUBLIC_SOMNIA_WS_URL || "wss://dream-rpc.somnia.network/ws",
 ): SomniaClient {
   if (!_client) {
     _client = new SomniaClient({ rpcUrl, wsUrl });

@@ -5,10 +5,10 @@
  * https://shannon-explorer.somnia.network/api/v2/
  *
  * Combines with the real-time somniaClient (HTTP polling) so the
- * WhalePulse store holds BOTH past + present Somnia testnet transfers.
+ * WhalePulse store holds BOTH past + present Somnia Mainnet transfers.
  */
 
-const EXPLORER = "https://shannon-explorer.somnia.network";
+const EXPLORER = "";
 
 export interface RawTransfer {
     from: string;
