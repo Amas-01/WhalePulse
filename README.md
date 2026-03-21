@@ -1,6 +1,6 @@
 # 🐋 WhalePulse
 
-> **Real-time whale tracker for the Somnia Testnet** — monitors native STT and ERC-20 token transfers on-chain, scores whale influence, detects suspicious patterns, and surfaces everything in a sleek cyberpunk dashboard.
+> **Real-time whale tracker for the Somnia Mainnet** — monitors native STT and ERC-20 token transfers on-chain, scores whale influence, detects suspicious patterns, and surfaces everything in a sleek cyberpunk dashboard.
 
 ---
 
@@ -30,7 +30,7 @@
 
 ## Overview
 
-WhalePulse is a full-stack blockchain analytics dashboard purpose-built for the **Somnia Testnet** (Chain ID `50312`). It combines two data sources — a live HTTP/WebSocket block scanner and the **Shannon Explorer REST API** — to give you a continuously-populated view of every significant STT and ERC-20 transfer the moment it lands on-chain.
+WhalePulse is a full-stack blockchain analytics dashboard purpose-built for the **Somnia Mainnet** (Chain ID `5031`). It combines two data sources — a live HTTP/WebSocket block scanner and the **Somnia Explorer REST API** — to give you a continuously-populated view of every significant STT and ERC-20 transfer the moment it lands on-chain.
 
 The app never shows a blank screen: on first load it bootstraps historical data from the Explorer, then seamlessly blends in real-time blocks as they arrive. Large transfers trigger whale alerts, feed a ranked leaderboard, and move the **Panic Meter** — a composite market-sentiment gauge.
 
@@ -77,8 +77,8 @@ The app never shows a blank screen: on first load it bootstraps historical data 
 └─────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────┐
-│                      Somnia Testnet (Chain 50312)                   │
-│   dream-rpc.somnia.network  ·  shannon-explorer.somnia.network      │
+│                       Somnia Mainnet (Chain 5031)                    │
+│   api.infra.mainnet.somnia.network  ·  explorer.somnia.network          │
 └─────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -133,7 +133,7 @@ The app never shows a blank screen: on first load it bootstraps historical data 
 | Language | Solidity 0.8.20 / 0.8.28 |
 | Libraries | OpenZeppelin Contracts v5 |
 | Type safety | TypeChain (ethers v6 bindings) |
-| Network | Somnia Testnet (Chain ID 50312) |
+| Network | Somnia Mainnet (Chain ID 5031) |
 
 ---
 
@@ -188,7 +188,7 @@ Whalepulse/
 ### Prerequisites
 
 - **Node.js** ≥ 18 and **npm** ≥ 9
-- A funded Somnia Testnet wallet (for contract deployment)
+- A funded Somnia Mainnet wallet (for contract deployment)
 - Git
 
 ### Frontend Setup
@@ -229,7 +229,7 @@ npx hardhat compile
 # Run tests
 npx hardhat test
 
-# Deploy to Somnia Testnet
+# Deploy to Somnia Mainnet
 npx hardhat ignition deploy ./ignition/modules/WhaleToken.ts --network somnia
 ```
 
@@ -241,8 +241,8 @@ npx hardhat ignition deploy ./ignition/modules/WhaleToken.ts --network somnia
 
 | Variable | Default | Description |
 |---|---|---|
-| `NEXT_PUBLIC_SOMNIA_RPC_URL` | `https://dream-rpc.somnia.network` | Somnia Testnet HTTP RPC endpoint |
-| `NEXT_PUBLIC_SOMNIA_WS_URL` | `wss://dream-rpc.somnia.network` | WebSocket endpoint (optional, falls back to polling) |
+| `NEXT_PUBLIC_SOMNIA_RPC_URL` | `https://api.infra.mainnet.somnia.network/` | Somnia Mainnet HTTP RPC endpoint |
+| `NEXT_PUBLIC_SOMNIA_WS_URL` | `wss://dream-rpc.somnia.network/ws` | WebSocket endpoint (optional, falls back to polling) |
 | `NEXT_PUBLIC_WHALE_THRESHOLD` | `100` | Minimum STT amount to classify a transfer as a whale move |
 
 ### Contracts (`Contracts/.env`)
@@ -250,7 +250,7 @@ npx hardhat ignition deploy ./ignition/modules/WhaleToken.ts --network somnia
 | Variable | Required | Description |
 |---|---|---|
 | `DEPLOYER_PRIVATE_KEY` | ✅ | Private key of the deployer wallet (include `0x` prefix) |
-| `SOMNIA_RPC_URL` | ✅ | Somnia Testnet RPC URL |
+| `SOMNIA_RPC_URL` | ✅ | Somnia Mainnet RPC URL |
 | `SOMNIA_API_KEY` | ☑️ | Shannon Explorer API key (for contract verification) |
 | `GAS_PRICE` | ☑️ | Gas price override (default: `auto`) |
 | `GAS_LIMIT` | ☑️ | Gas limit override (default: `8000000`) |
@@ -345,7 +345,7 @@ Recharts area chart of transfer volume over time, updated live via the store sub
 
 ### `WhaleToken.sol` (`WHAL`)
 
-A standard OpenZeppelin ERC-20 token deployed to the Somnia Testnet.
+A standard OpenZeppelin ERC-20 token deployed to the Somnia Mainnet.
 
 ```solidity
 contract WhaleToken is ERC20, Ownable {
@@ -365,10 +365,11 @@ contract WhaleToken is ERC20, Ownable {
 | Symbol | WHAL |
 | Decimals | 18 |
 | Initial Supply | 1,000,000,000 WHAL |
-| Network | Somnia Testnet (Chain ID 50312) |
+| Network | Somnia Mainnet (Chain ID 5031) |
 | Admin | Deployer (Ownable) |
+| **Address** | `0xaD43c543751cE69a869A6F32e5F36633492BF443` |
 
-The `mintTo` function allows the contract owner to mint additional tokens, useful for faucet-style distribution during testnet development.
+The `mintTo` function allows the contract owner to mint additional tokens, useful for faucet-style distribution.
 
 ---
 
@@ -385,9 +386,9 @@ npm start
 
 Set the three `NEXT_PUBLIC_*` environment variables in your hosting dashboard.
 
-### Contracts (Somnia Testnet)
+### Contracts (Somnia Mainnet)
 
-1. Fund your deployer wallet with testnet STT from the Somnia faucet.
+1. Fund your deployer wallet with STT from the Somnia Mainnet.
 2. Ensure `DEPLOYER_PRIVATE_KEY` and `SOMNIA_RPC_URL` are set in `Contracts/.env`.
 3. Run:
 
@@ -418,5 +419,5 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 ---
 
 <p align="center">
-  Built for the <strong>Somnia Testnet</strong> · Powered by <strong>Next.js</strong> + <strong>Hardhat</strong>
+  Built for the <strong>Somnia Mainnet</strong> · Powered by <strong>Next.js</strong> + <strong>Hardhat</strong>
 </p>
